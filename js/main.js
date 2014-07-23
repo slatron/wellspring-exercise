@@ -46,7 +46,7 @@ jQuery.noConflict();
         updateTable(allTrains.slice(page - 1, page + 4));
 
         // Show total rows in pagination
-        $([data-pge-total]).text(allTrains.length);
+        $('[data-page-total]').text(allTrains.length);
       };
 
   // Get json data
