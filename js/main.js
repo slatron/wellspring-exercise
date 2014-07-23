@@ -5,13 +5,12 @@ jQuery.noConflict();
   // ==============================================
   // Initial app state variables
   // ==============================================
-  var $table    = $('#train-table'),
-      $message  = $('.message'),
-      allTrains = [],
-      page      = 1,
+  var page      = 1,
       perPage   = 5,
       providers = ['El', 'Metra', 'Amtrak'],
-
+      $table    = $('#train-table'),
+      $message  = $('.message'),
+      allTrains = [],
       // ==============================================
       // Application methods
       // ==============================================
@@ -31,14 +30,41 @@ jQuery.noConflict();
         $.each(trains, function(idx, elem) {
           var $newRow = $('<tr></tr>');
 
+          // Set missing values to "Unknown"
+          elem.trainLine === "" ? elem.trainLine = "unknown" : null;
+          elem.routeName === "" ? elem.routeName = "unknown" : null;
+          elem.runNumber === "" ? elem.runNumber = "unknown" : null;
+          elem.operatorId === "" ? elem.operatorId = "unknown" : null;
+
+          // Append new cells to detached row
           $newRow.append('<td>' + elem.trainLine  + '</td>');
           $newRow.append('<td>' + elem.routeName  + '</td>');
           $newRow.append('<td>' + elem.runNumber  + '</td>');
           $newRow.append('<td>' + elem.operatorId + '</td>');
 
+          // Append detached new row to detached rows
           $rows.append($newRow);
 
         });
+
+        // Add empty rows if less than perPage exist
+        if(trains.length < perPage) {
+          var blankRows = perPage - trains.length;
+
+          for (var i =0; i < blankRows; i++) {
+            var $blankRow = $('<tr></tr>');
+
+            // Append new cells to detached row
+            $blankRow.append('<td>&nbsp;</td>');
+            $blankRow.append('<td>&nbsp;</td>');
+            $blankRow.append('<td>&nbsp;</td>');
+            $blankRow.append('<td>&nbsp;</td>');
+
+            // Append detached new row to detached rows
+            $rows.append($blankRow);
+
+          };
+        }
 
         // Using only one actual DOM append to
         // attach new table for performance optimization
@@ -48,11 +74,21 @@ jQuery.noConflict();
       },
 
       // ==============================================
+      // Sort By Clicked Column
+      // ==============================================
+      columnSort = function(col) {
+
+        var currentTrains = subselectTrains();
+
+        updateTable(currentTrains.objSort(col));
+      },
+
+      // ==============================================
       // subselectTrains() returns the current page 
       // subset of trains determined by state vars
       // ==============================================
       subselectTrains = function() {
-        var firstRecord = ((page - 1) * perPage) - 1;
+        var firstRecord = (page - 1) * perPage;
 
         // Correct for first page
         firstRecord === -1 ? firstRecord++ : null;
@@ -109,7 +145,8 @@ jQuery.noConflict();
 
         switch(dir) {
           case 'right':
-            var nextIndex = (((page - 1) * perPage) - 1) + perPage;
+            var nextIndex = ((page - 1) * perPage) + perPage;
+
             if ( nextIndex < allTrains.length ) {
               page++;
               doUpdate = true;
@@ -129,6 +166,7 @@ jQuery.noConflict();
             msg = "We're sorry, an error has occured during pagination. Please try again."
         }
         
+        // Update display or show error message
         doUpdate ? updateTable(subselectTrains()) : showMsg(msg);
 
         return false;
@@ -156,6 +194,14 @@ jQuery.noConflict();
     var $this = $(this);
 
     paginate($this.data('page'));
+
+    return false;
+  })
+
+  $table.on('click', 'th', function() {
+    var $this = $(this);
+
+    columnSort($this.data('sort'));
 
     return false;
   })

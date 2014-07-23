@@ -9,7 +9,7 @@
     <meta name="robots" content="noidex, nofollow">
 
     <link rel="stylesheet" href="css/normalize.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 
   </head>
@@ -29,7 +29,7 @@
       <option value="Amtrack">Amtrack</option>
     </select>
 
-    <table id="train-table">
+    <table id="train-table" class="train-table">
       <thead>
         <tr>
           <th data-sort="trainLine">Train Line</th>
@@ -50,8 +50,10 @@
 
     <p class="message"></p>
 
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+    <script src="js/objSort.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

@@ -1,5 +1,29 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
 .pagination i {
   cursor: pointer; }
 
 .message {
   color: #cc3333; }
+
+.train-table {
+  width: 100%;
+  border: 1px solid #614526;
+  border-collapse: collapse; }
+  .train-table td, .train-table th {
+    padding: 0.5em;
+    width: 25%; }
+  .train-table th {
+    cursor: pointer;
+    background: #8a5f36;
+    text-align: left;
+    border: 1px dotted #222222; }
+  .train-table td {
+    border: 1px solid #614526; }
+  .train-table tr:nth-child(even) {
+    background: #b49476; }
+  .train-table tr:nth-child(odd) {
+    background: #f0e0c8; }
