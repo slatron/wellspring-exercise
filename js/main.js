@@ -5,7 +5,10 @@ jQuery.noConflict();
   var $table    = $('#train-table'),
       allTrains = [],
       page      = 1,
+      providers = ['El', 'Metra', 'Amtrak'],
 
+      // Update table takes an array of trains
+      // and displays them in the main table
       updateTable = function(trains) {
 
         $table.find('tbody').remove();
@@ -25,13 +28,23 @@ jQuery.noConflict();
         });
 
         $table.append($rows);
+
+        return false;
+      },
+
+      // return current page subset of trains
+      // uses current application state data
+      subselectTrains = function() {
+        if(page + 4 > allTrains.length) {
+          return allTrains.slice(page - 1);
+        } else {
+          return allTrains.slice(page - 1, page + 4);
+        }
       },
 
       loadInitialTrains = function(data) {
 
         // Sanitize data by removing unrecognized providers
-        var providers = ['El', 'Metra', 'Amtrak'];
-
         var sanitizedData = $.map(data, function(elem) {
           if(providers.indexOf(elem.trainLine) > -1) {
             return elem;
@@ -43,13 +56,15 @@ jQuery.noConflict();
         allTrains = sanitizedData;
 
         // Move this to function that returns current page
-        updateTable(allTrains.slice(page - 1, page + 4));
+        updateTable(subselectTrains());
 
         // Show total rows in pagination
         $('[data-page-total]').text(allTrains.length);
 
         // Show first page in pagination
         $('[data-page-current]').text('1');
+
+        return false;
 
       };
 
