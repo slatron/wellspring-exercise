@@ -1,3 +1,21 @@
 #message {
-  color: $color-red;
+  background: $color-pinkish;
+  color: $color-black;
+  opacity: 0;
+
+  -webkit-transition: opacity 750ms ease;
+  -moz-transition: opacity 750ms ease;
+  -o-transition: opacity 750ms ease;
+  transition: opacity 750ms ease;
+
+  @include border-radius(5px);
+
+  &.active {
+    opacity: 1;
+  }
+
+  p {
+    padding: $base-unit-half;
+  }
+
 }

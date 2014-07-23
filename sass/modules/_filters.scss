@@ -1,0 +1,31 @@
+#filters {
+
+  .filter-container {
+    background: $color-tan-light;
+    padding: $base-unit-half $base-unit-quarter;
+  }
+
+  label {
+    background: $color-tan;
+    border: 2px solid $color-brown-dark;
+    display: inline-block;
+    font-size: $base-font-size - 3px;
+    font-weight: bold;
+    margin-right: $base-unit-half;
+    padding: $base-unit-half;
+
+    @include border-radius(5px);
+
+  }
+}
+
+@media only screen and (min-width: $breakpoint) {
+  #filters {
+    label {
+      display: block;
+      margin-bottom: $base-unit-half;
+      margin-right: 0;    
+      font-size: $base-font-size;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+// Fonts
+$base-font-family: 'Open Sans', sans-serif;
+
+$base-font-size: 16px;
+
+body, htnl {
+  font-size: $base-font-size;
+}
+
+h1 { font-size: $base-font-size + 8px;}
+h2 { font-size: $base-font-size + 4px; margin-top: 0; }
+h3 { font-size: $base-font-size; margin-top: 0; }
+h4 { font-size: $base-font-size - 2px; margin-top: 0; }
+h5 { font-size: $base-font-size - 4px; margin-top: 0; }
+h6 { font-size: $base-font-size - 6px; margin-top: 0; }
+
+h1, h2, h3 {margin-bottom: $base-unit-quarter;}
+
+h1 {font-size: $base-font-size;}
+h2 {font-size: $base-font-size - 2px;}
+

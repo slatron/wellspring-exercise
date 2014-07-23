@@ -8,13 +8,15 @@
   td, th {
     padding: $base-unit-half;
     width: 25%;
+    font-size: $base-font-size - 2px;
   }
 
   th {
     cursor: pointer;
-    background: $color-brown;
     text-align: left;
     border: 1px dotted $color-black;
+
+    @include linear-gradient($color-tan, $color-brown);
 
     i {
       color: $color-tan;

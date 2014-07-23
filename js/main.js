@@ -7,13 +7,13 @@ jQuery.noConflict();
   //
   // page:           starting page for application
   // perPage:        number of records per page
-  // providers:      Allowed companies for sanitizing data & filtering
+  // lines:      Allowed companies for sanitizing data & filtering
   // allTrains:      All sanitized train data form json call
   // filteredTrains: Current filtered array of trains to show
   // ==================================================================
   var page           = 1,
       perPage        = 5,
-      providers      = ['El', 'Metra', 'Amtrak'],
+      lines          = ['El', 'Metra', 'Amtrak'],
       allTrains      = [],
       filteredTrains = [],
 
@@ -37,7 +37,7 @@ jQuery.noConflict();
 
         var $rows = $('<tbody></tbody>');
 
-        $message.empty();
+        $message.empty().removeClass('active');
         $table.find('tbody').remove();
         $('[data-total-runs]').text(filteredTrains.length);
         $('[data-page-current]').text(page);
@@ -92,11 +92,17 @@ jQuery.noConflict();
       // ==============================================
       // Sort By Clicked Column
       // ==============================================
-      columnSort = function(col) {
+      columnSort = function(col, reverse) {
+
+        reverse = reverse || false;
 
         var currentTrains = subselectTrains();
 
-        updateTable(currentTrains.objSort(col));
+        if(!reverse) {
+          updateTable(currentTrains.objSort(col));
+        } else {
+          updateTable(currentTrains.objSort(col, -1));
+        }
 
         return false;
       },
@@ -121,15 +127,15 @@ jQuery.noConflict();
       },
 
       // ===================================================
-      // Return subset of trains based on current providers
+      // Return subset of trains based on current lines
       // ===================================================
       sanitizeData = function(data) {
 
         var result;
 
-        // Sanitize data by removing unrecognized providers
+        // Sanitize data by removing unrecognized lines
         result = $.map(data, function(elem) {
-          if(providers.indexOf(elem.trainLine) > -1) {
+          if(lines.indexOf(elem.trainLine) > -1) {
             return elem;
           } else {
             return null;
@@ -175,7 +181,12 @@ jQuery.noConflict();
       // showMsg() displays user messages
       // ==============================================
       showMsg = function(msg) {
-        $message.empty().text(msg);
+
+        var $text = $('<p>' + msg + '</p>');
+
+        $message.empty()
+                .append($text)
+                .addClass('active');
 
         return false;
       },
@@ -195,7 +206,10 @@ jQuery.noConflict();
               page++;
               doUpdate = true;
             } else {
-              msg = "There are no more trains to show. Please click the left arrow to view more trains.";
+              msg = "There are no more trains to show.";
+              if (page > 1) {
+                msg +=" Please click the left arrow to view more trains.";
+              }
             }
             break;
           case 'left':
@@ -203,7 +217,10 @@ jQuery.noConflict();
               page--;
               doUpdate = true;
             } else {
-              msg = "You are already viewing the first page of trains. Please click the right arrow to view more trains.";
+              msg = "You are already viewing the first page of trains.";
+              if (page > 1) {
+                msg +=" Please click the right arrow to view more trains.";
+              }
             }
             break;
           default:
@@ -227,7 +244,7 @@ jQuery.noConflict();
       // Pass through "data" key of json data
       init(data.data);
     }
-  });
+  })
 
   // ==============================================
   // Attach event listeners
@@ -252,30 +269,44 @@ jQuery.noConflict();
       }
   });
 
+  // Table Column Sorting
   $table.on('click', 'th', function() {
     var $this = $(this);
 
-    columnSort($this.data('sort'));
+    // If this column is already sorted, perform a reverse sort
+    if($this.hasClass('sorted')) {
+
+      $this.removeClass('sorted');
+      columnSort($this.data('sort'), true);
+
+    } else {
+
+      $this.addClass('sorted');
+      $this.siblings().removeClass('sorted');
+      columnSort($this.data('sort'));
+
+    }
 
     return false;
   })
 
+  // Filter Buttons
   $filters.on('change', 'input', function() {
 
     if($cbs.filter(':checked').length > 0) {
 
-      providers.length = 0;
+      lines.length = 0;
 
       $.each($cbs, function(idx, elem) {
         var $this = $(this);
 
         if($this.is(':checked')) {
-          providers.push($this.attr('name'));
+          lines.push($this.attr('name'));
         } 
 
       });
 
-      // Refilter data using new providers array
+      // Refilter data using new lines array
       filteredTrains = sanitizeData(allTrains);
 
       // Re-initialize Application with Filtered Data
@@ -290,7 +321,11 @@ jQuery.noConflict();
 
   })
 
- 
+  // Mobile menu icon 
+  $('.menu-icon').on('click', function() {
+    $filters.toggleClass('active');
+  });
+
 })(jQuery);
 
 

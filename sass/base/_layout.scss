@@ -1,9 +1,52 @@
 *, *:before, *:after {
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.menu-icon {
+  color: $color-brown;
+  cursor: pointer;
+  font-size: $base-font-size * 2;
+  float: right;
+  margin: $base-unit-half;
+}
+
+aside {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1%;
+
+  -webkit-transition: max-height 250ms ease;
+  -moz-transition: max-height 250ms ease;
+  -o-transition: max-height 250ms ease;
+  transition: max-height 250ms ease;
+
+  &.active {
+    max-height: 40em;
+  }
+}
+
+main {
+  padding: 1%;
 }
 
 @media only screen and (min-width: $breakpoint) {
 
-  
+  .menu-icon {
+    display: none;
+  }
+
+  main {
+    float: left;
+    width: 70%;
+  }
+
+  aside {
+    float: right;
+    max-height: 40em;
+    padding: 48px 1% 0;
+    width: 30%;
+  }
 
 }
