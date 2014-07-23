@@ -5,6 +5,7 @@ jQuery.noConflict();
   var $table    = $('#train-table'),
       allTrains = [],
       page      = 1,
+      perPage   = 5,
       providers = ['El', 'Metra', 'Amtrak'],
 
       // Update table takes an array of trains
@@ -59,11 +60,14 @@ jQuery.noConflict();
         // Move this to function that returns current page
         updateTable(subselectTrains());
 
-        // Show total rows in pagination
-        $('[data-page-total]').text(allTrains.length);
+        // Show total runs
+        $('[data-total-runs]').text(allTrains.length);
 
         // Show first page in pagination
         $('[data-page-current]').text(page);
+
+        // Show total pages in pagination
+        $('[data-page-total]').text(Math.round(allTrains.length / perPage));
 
         return false;
 
