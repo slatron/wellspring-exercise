@@ -27,7 +27,7 @@ jQuery.noConflict();
         $table.append($rows);
       },
 
-      loadInitialSchedule = function(data) {
+      loadInitialTrains = function(data) {
 
         // Sanitize data by removing unrecognized providers
         var providers = ['El', 'Metra', 'Amtrak'];
@@ -41,8 +41,12 @@ jQuery.noConflict();
         });
 
         allTrains = sanitizedData;
-        
+
+        // Move this to function that returns current page
         updateTable(allTrains.slice(page - 1, page + 4));
+
+        // Show total rows in pagination
+        $([data-pge-total]).text(allTrains.length);
       };
 
   // Get json data
@@ -51,7 +55,7 @@ jQuery.noConflict();
     'dataType': 'json',
     'success' : function(data) {
       // Pass through "data" key of json data
-      loadInitialSchedule(data.data);
+      loadInitialTrains(data.data);
     }
   })
  
