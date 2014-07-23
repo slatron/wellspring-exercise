@@ -2,11 +2,35 @@ jQuery.noConflict();
  
 (function($) {
 
-  var trains = {},
+  var $table = $('#train-table'),
+      allTrains = {},
+      page   = 1,
+
+      updateTable = function(trains) {
+
+        $table.find('tbody').remove();
+
+        var $rows = ('<tbody></tbody>');
+
+        $.each(trains, function(idx, elem) {
+          var $newRow = ('<tr></tr>');
+
+          $newRow.append('<td>' + elem.trainLine + '</td>');
+          $newRow.append('<td>' + elem.routeName + '</td>');
+          $newRow.append('<td>' + elem.runNumber + '</td>');
+          $newRow.append('<td>' + elem.operatorId + '</td>');
+
+          $rows.append($newRow);
+
+        });
+
+        $table.append($rows);
+      },
+
       loadInitialSchedule = function(data) {
-        trains = data;
-        console.log(trains);
-      }
+        allTrains = data;
+        updateTable(trains);
+      };
 
   $.ajax({
     'url'     : 'json/trains.json',
