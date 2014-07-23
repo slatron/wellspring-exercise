@@ -33,7 +33,7 @@ jQuery.noConflict();
         var providers = ['El', 'Metra', 'Amtrak'];
 
         var sanitizedData = $.map(data, function(elem) {
-          if(elem.trainLine in providers) {
+          if(providers.indexOf(elem.trainLine) > -1) {
             return elem;
           } else {
             return null;
