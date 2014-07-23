@@ -67,7 +67,7 @@ jQuery.noConflict();
         $('[data-page-current]').text(page);
 
         // Show total pages in pagination
-        $('[data-page-total]').text(Math.round(allTrains.length / perPage));
+        $('[data-page-total]').text(Math.ceil(allTrains.length / perPage));
 
         return false;
 
