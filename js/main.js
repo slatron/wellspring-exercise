@@ -227,10 +227,7 @@ jQuery.noConflict();
       // Pass through "data" key of json data
       init(data.data);
     }
-  })
-
-  // Remove this in favor of ajax call for live push
-  init(jsonData.data);
+  });
 
   // ==============================================
   // Attach event listeners
