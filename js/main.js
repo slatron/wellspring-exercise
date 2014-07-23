@@ -11,7 +11,9 @@ jQuery.noConflict();
   $.ajax({
     'url'     : 'json/trains.json',
     'dataType': 'json',
-    'success' : loadInitialSchedule(data)
+    'success' : function(data) {
+      loadInitialSchedule(data);
+    }
   })
  
 })(jQuery);
