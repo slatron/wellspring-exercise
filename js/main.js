@@ -2,9 +2,9 @@ jQuery.noConflict();
  
 (function($) {
 
-  var $table = $('#train-table'),
-      allTrains = {},
-      page   = 1,
+  var $table    = $('#train-table'),
+      allTrains = [],
+      page      = 1,
 
       updateTable = function(trains) {
 
@@ -28,14 +28,28 @@ jQuery.noConflict();
       },
 
       loadInitialSchedule = function(data) {
-        allTrains = data;
+
+        // Sanitize data by removing unrecognized providers
+        var providers = ['El', 'Metra', 'Amtrak'];
+
+        var sanitizedData = $.map(data, function(elem) {
+          if(elem.trainLine in providers) {
+            return elem;
+          } else {
+            return null;
+          }
+        });
+
+        allTrains = sanitizedData;
         updateTable(allTrains);
       };
 
+  // Get json data
   $.ajax({
     'url'     : 'json/trains.json',
     'dataType': 'json',
     'success' : function(data) {
+      // Pass through "data" key of json data
       loadInitialSchedule(data.data);
     }
   })
