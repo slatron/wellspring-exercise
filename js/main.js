@@ -29,7 +29,7 @@ jQuery.noConflict();
 
       loadInitialSchedule = function(data) {
         allTrains = data;
-        updateTable(trains);
+        updateTable(allTrains);
       };
 
   $.ajax({
