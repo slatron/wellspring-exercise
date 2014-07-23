@@ -36,7 +36,7 @@ jQuery.noConflict();
     'url'     : 'json/trains.json',
     'dataType': 'json',
     'success' : function(data) {
-      loadInitialSchedule(data);
+      loadInitialSchedule(data.data);
     }
   })
  
