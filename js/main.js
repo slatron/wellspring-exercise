@@ -2,15 +2,29 @@ jQuery.noConflict();
  
 (function($) {
 
-  // ==============================================
+  // ==================================================================
   // Initial app state variables
-  // ==============================================
-  var page      = 1,
-      perPage   = 5,
-      providers = ['El', 'Metra', 'Amtrak'],
-      $table    = $('#train-table'),
-      $message  = $('.message'),
-      allTrains = [],
+  //
+  // page:           starting page for application
+  // perPage:        number of records per page
+  // providers:      Allowed companies for sanitizing data & filtering
+  // allTrains:      All sanitized train data form json call
+  // filteredTrains: Current filtered array of trains to show
+  // ==================================================================
+  var page           = 1,
+      perPage        = 5,
+      providers      = ['El', 'Metra', 'Amtrak'],
+      allTrains      = [],
+      filteredTrains = [],
+
+      // ==============================================
+      // Cached jQuery Objects
+      // ==============================================
+      $table   = $('#train-table'),
+      $message = $('#message'),
+      $filters = $('#filters'),
+      $cbs     = $filters.find('input'),
+
       // ==============================================
       // Application methods
       // ==============================================
@@ -25,7 +39,9 @@ jQuery.noConflict();
 
         $message.empty();
         $table.find('tbody').remove();
+        $('[data-total-runs]').text(filteredTrains.length);
         $('[data-page-current]').text(page);
+        $('[data-page-total]').text(Math.ceil(filteredTrains.length / perPage));
 
         $.each(trains, function(idx, elem) {
           var $newRow = $('<tr></tr>');
@@ -81,6 +97,8 @@ jQuery.noConflict();
         var currentTrains = subselectTrains();
 
         updateTable(currentTrains.objSort(col));
+
+        return false;
       },
 
       // ==============================================
@@ -93,22 +111,24 @@ jQuery.noConflict();
         // Correct for first page
         firstRecord === -1 ? firstRecord++ : null;
 
-        if(firstRecord + perPage > allTrains.length) {
-          return allTrains.slice(firstRecord);
+        if(firstRecord + perPage > filteredTrains.length) {
+          return filteredTrains.slice(firstRecord);
         } else {
-          return allTrains.slice(firstRecord, firstRecord + perPage);
+          return filteredTrains.slice(firstRecord, firstRecord + perPage);
         }
 
         return false;
       },
 
-      // ==============================================
-      // Setup initial table values
-      // ==============================================
-      init = function(data) {
+      // ===================================================
+      // Return subset of trains based on current providers
+      // ===================================================
+      sanitizeData = function(data) {
+
+        var result;
 
         // Sanitize data by removing unrecognized providers
-        var sanitizedData = $.map(data, function(elem) {
+        result = $.map(data, function(elem) {
           if(providers.indexOf(elem.trainLine) > -1) {
             return elem;
           } else {
@@ -116,14 +136,36 @@ jQuery.noConflict();
           }
         });
 
-        allTrains = sanitizedData;
+        return result;
 
+      },
+
+      // ==============================================
+      // Setup initial table values
+      // ==============================================
+      init = function(data, refresh) {
+
+        refresh = refresh || false;
+        page = 1;
+
+        if(!refresh) {
+          // Store initial trains array
+          allTrains = sanitizeData(data);
+
+          // Clone allTrains to filteredTrains with slice trick
+          // This prevents filteredTrains from referencing allTrains
+          filteredTrains = allTrains.slice(0);
+        } else {
+          filteredTrains = data;
+        }
+
+        // Start by displaying all trains
         updateTable(subselectTrains());
 
         // Initialize numnerical values on page
-        $('[data-total-runs]').text(allTrains.length);
+        $('[data-total-runs]').text(filteredTrains.length);
         $('[data-page-current]').text(page);
-        $('[data-page-total]').text(Math.ceil(allTrains.length / perPage));
+        $('[data-page-total]').text(Math.ceil(filteredTrains.length / perPage));
 
         return false;
 
@@ -134,6 +176,8 @@ jQuery.noConflict();
       // ==============================================
       showMsg = function(msg) {
         $message.empty().text(msg);
+
+        return false;
       },
 
       // ==============================================
@@ -147,7 +191,7 @@ jQuery.noConflict();
           case 'right':
             var nextIndex = ((page - 1) * perPage) + perPage;
 
-            if ( nextIndex < allTrains.length ) {
+            if ( nextIndex < filteredTrains.length ) {
               page++;
               doUpdate = true;
             } else {
@@ -185,6 +229,9 @@ jQuery.noConflict();
     }
   })
 
+  // Remove this in favor of ajax call for live push
+  init(jsonData.data);
+
   // ==============================================
   // Attach event listeners
   // ==============================================
@@ -198,12 +245,52 @@ jQuery.noConflict();
     return false;
   })
 
+  // Keyboard pagination
+  $(document).keydown(function (e) { 
+
+      if (e.keyCode == 37 || e.keyCode == 40) {
+          paginate('left');
+      } else if (e.keyCode == 39 || e.keyCode == 38) {
+          paginate('right');
+      }
+  });
+
   $table.on('click', 'th', function() {
     var $this = $(this);
 
     columnSort($this.data('sort'));
 
     return false;
+  })
+
+  $filters.on('change', 'input', function() {
+
+    if($cbs.filter(':checked').length > 0) {
+
+      providers.length = 0;
+
+      $.each($cbs, function(idx, elem) {
+        var $this = $(this);
+
+        if($this.is(':checked')) {
+          providers.push($this.attr('name'));
+        } 
+
+      });
+
+      // Refilter data using new providers array
+      filteredTrains = sanitizeData(allTrains);
+
+      // Re-initialize Application with Filtered Data
+      init(filteredTrains, true);
+
+    } else {
+
+      $(this).prop('checked', true);
+      showMsg("You need to leave at least one train line checked to see results.")
+
+    }
+
   })
 
  

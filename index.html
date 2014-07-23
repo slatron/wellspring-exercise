@@ -9,49 +9,68 @@
     <meta name="robots" content="noidex, nofollow">
 
     <link rel="stylesheet" href="css/normalize.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 
   </head>
   <body>
 
-    <h1>Chicago Train Schedule</h1>
+    <aside id="filters">
+      <h3>
+        View these trains by train line: 
+      </h3>
 
-    <h2>Number of Runs Today: <span data-total-runs></span></h2>
+      <label for="Amtrak">
+        <input type="checkbox" name="Amtrak" id="Amtrak" checked> Amtrak
+      </label>
+      
+      <label for="El">
+        <input type="checkbox" name="El" id="El" checked> El
+      </label>
+      
+      <label for="Metra">
+        <input type="checkbox" name="Metra" id="Metra" checked> Metra
+      </label>
+    <aside>
 
-    <label for="filterby">
-      Only show me: 
-    </label>
+    <main>
 
-    <select name="filterby">
-      <option value="El">El</option>
-      <option value="Metra">Metra</option>
-      <option value="Amtrack">Amtrack</option>
-    </select>
+      <h1>Chicago Train Schedule</h1>
 
-    <table id="train-table" class="train-table">
-      <thead>
-        <tr>
-          <th data-sort="trainLine">Train Line</th>
-          <th data-sort="routeName">Route</th>
-          <th data-sort="runNumber">Run Number</th>
-          <th data-sort="operatorId">Operator ID</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+      <h2>Number of Runs: <span data-total-runs></span></h2>
 
-    <p class="pagination">
-      <i data-page="left" class="fa fa-arrow-left"></i>
-      Page <span data-page-current></span> of <span data-page-total></span>
-      <i data-page="right" class="fa fa-arrow-right"></i>
-    </p>
+      <table id="train-table" class="train-table">
+        <thead>
+          <tr>
+            <th data-sort="trainLine">
+              Train Line <i class="fa fa-arrows-v"></i>
+            </th>
+            <th data-sort="routeName">
+              Route <i class="fa fa-arrows-v"></i>
+            </th>
+            <th data-sort="runNumber">
+              Run Number <i class="fa fa-arrows-v"></i>
+            </th>
+            <th data-sort="operatorId">
+              Operator ID <i class="fa fa-arrows-v"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
 
-    <p class="message"></p>
+      <p class="pagination">
+        <i data-page="left" class="fa fa-arrow-left"></i>
+        Page <span data-page-current></span> of <span data-page-total></span>
+        <i data-page="right" class="fa fa-arrow-right"></i>
+      </p>
 
+      <p id="message"></p>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    </main>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
     <script src="js/objSort.js"></script>
     <script src="js/main.js"></script>

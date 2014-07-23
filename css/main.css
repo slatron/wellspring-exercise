@@ -6,7 +6,7 @@
 .pagination i {
   cursor: pointer; }
 
-.message {
+#message {
   color: #cc3333; }
 
 .train-table {
@@ -21,6 +21,8 @@
     background: #8a5f36;
     text-align: left;
     border: 1px dotted #222222; }
+    .train-table th i {
+      color: #b49476; }
   .train-table td {
     border: 1px solid #614526; }
   .train-table tr:nth-child(even) {
