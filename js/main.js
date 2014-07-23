@@ -33,7 +33,7 @@ jQuery.noConflict();
       },
 
       // return current page subset of trains
-      // uses current application state data
+      // uses application state vars
       subselectTrains = function() {
         if(page + 4 > allTrains.length) {
           return allTrains.slice(page - 1);
@@ -42,7 +42,8 @@ jQuery.noConflict();
         }
       },
 
-      loadInitialTrains = function(data) {
+      // Setup initial table
+      init = function(data) {
 
         // Sanitize data by removing unrecognized providers
         var sanitizedData = $.map(data, function(elem) {
@@ -62,7 +63,7 @@ jQuery.noConflict();
         $('[data-page-total]').text(allTrains.length);
 
         // Show first page in pagination
-        $('[data-page-current]').text('1');
+        $('[data-page-current]').text(page);
 
         return false;
 
@@ -74,7 +75,7 @@ jQuery.noConflict();
     'dataType': 'json',
     'success' : function(data) {
       // Pass through "data" key of json data
-      loadInitialTrains(data.data);
+      init(data.data);
     }
   })
  
