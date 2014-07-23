@@ -10,10 +10,10 @@ jQuery.noConflict();
 
         $table.find('tbody').remove();
 
-        var $rows = ('<tbody></tbody>');
+        var $rows = $('<tbody></tbody>');
 
         $.each(trains, function(idx, elem) {
-          var $newRow = ('<tr></tr>');
+          var $newRow = $('<tr></tr>');
 
           $newRow.append('<td>' + elem.trainLine + '</td>');
           $newRow.append('<td>' + elem.routeName + '</td>');
