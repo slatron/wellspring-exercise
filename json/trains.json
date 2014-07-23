@@ -1,0 +1,130 @@
+{
+	"data": [
+		{
+			"trainLine": "El",
+			"routeName": "Brown Line",
+			"runNumber": "E102",
+			"operatorId": "SJones"
+		},
+		{
+			"trainLine": "Metra",
+			"routeName": "UPN",
+			"runNumber": "M405",
+			"operatorId": "AJohnson"
+		},
+		{
+			"trainLine": "Amtrak",
+			"routeName": "Hiawatha",
+			"runNumber": "A006",
+			"operatorId": "LBeck"
+		},
+		{
+			"trainLine": "El",
+			"routeName": "Red Line",
+			"runNumber": "E432",
+			"operatorId": "LHill"
+		},
+		{
+			"trainLine": "Amtrak",
+			"routeName": "Hiawatha",
+			"runNumber": "A005",
+			"operatorId": "LBeck"
+		},
+		{
+			"trainLine": "Metra",
+			"routeName": "",
+			"runNumber": "M623",
+			"operatorId": "ESanders"
+		},
+		{
+			"trainLine": "El",
+			"routeName": "Green Line",
+			"runNumber": "E312",
+			"operatorId": "GIsland"
+		},
+		{
+			"trainLine": "Trolley",
+			"routeName": "Willis Tower",
+			"runNumber": "T666",
+			"operatorId": "JDoe"
+		},
+		{
+			"trainLine": "El",
+			"routeName": "Red Line",
+			"runNumber": "E432",
+			"operatorId": "LHill"
+		},
+		{
+			"trainLine": "El",
+			"routeName": "Blue Line",
+			"runNumber": "E223",
+			"operatorId": "MHare"
+		},
+		{
+			"trainLine": "Metra",
+			"routeName": "Oak Park",
+			"runNumber": "M559",
+			"operatorId": "EGesell"
+		},
+		{
+			"trainLine": "Amtrak",
+			"routeName": "Indianapolis",
+			"runNumber": "A317",
+			"operatorId": "ALuck"
+		},
+		{
+			"trainLine": "Amtrak",
+			"routeName": "Cleveland",
+			"runNumber": "A236",
+			"operatorId": "LJames"
+		},
+		{
+			"trainLine": "Netra",
+			"routeName": "Gary",
+			"runNumber": "M444",
+			"operatorId": "MJackson"
+		},
+		{
+			"trainLine": "El",
+			"routeName": "Addison",
+			"runNumber": "E108",
+			"operatorId": "SCastro"
+		},
+		{
+			"trainLine": "Metra",
+			"routeName": "Arlington Heights",
+			"runNumber": "",
+			"operatorId": "CKeem"
+		},
+		{
+			"trainLine": "El",
+			"routeName": "Sox 35th",
+			"runNumber": "E790",
+			"operatorId": "CSale"
+		},
+		{
+			"trainLine": "Amtrak",
+			"routeName": "St. Louis",
+			"runNumber": "A654",
+			"operatorId": "YMolina"
+		},
+		{
+			"trainLine": "Metra",
+			"routeName": "Elgin",
+			"runNumber": "M289",
+			"operatorId": "EKingery"
+		},
+		{
+			"trainLine": "",
+			"routeName": "",
+			"runNumber": "",
+			"operatorId": ""
+		},
+		{
+			"trainLine": " Amtrak",
+			"routeName": "Detroit",
+			"runNumber": "A999",
+			"operatorId": "AWilson"
+		}
+	]
+}

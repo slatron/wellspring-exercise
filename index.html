@@ -1,0 +1,44 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Code Exercise</title>
+    <meta name="description" content="Example single page application for consuming Chicago train schedules">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noidex, nofollow">
+
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+
+    <label for="filterby">
+      Only show me: 
+    </label>
+
+    <select name="filterby">
+      <option value="El">El</option>
+      <option value="Metra">Metra</option>
+      <option value="Amtrack">Amtrack</option>
+    </select>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Train Line</th>
+          <th>Route</th>
+          <th>Run Number</th>
+          <th>Operator ID</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
