@@ -47,6 +47,10 @@ jQuery.noConflict();
 
         // Show total rows in pagination
         $('[data-page-total]').text(allTrains.length);
+
+        // Show first page in pagination
+        $('[data-page-current]').text('1');
+
       };
 
   // Get json data
