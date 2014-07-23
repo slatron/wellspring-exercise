@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,10 +32,10 @@
     <table id="train-table">
       <thead>
         <tr>
-          <th>Train Line</th>
-          <th>Route</th>
-          <th>Run Number</th>
-          <th>Operator ID</th>
+          <th data-sort="trainLine">Train Line</th>
+          <th data-sort="routeName">Route</th>
+          <th data-sort="runNumber">Run Number</th>
+          <th data-sort="operatorId">Operator ID</th>
         </tr>
       </thead>
       <tbody>
@@ -43,9 +43,12 @@
     </table>
 
     <p class="pagination">
-      <i class="fa fa-arrow-left"></i> Page <span data-page-current></span> of <span data-page-total></span> <i class="fa fa-arrow-right"></i>
+      <i data-page="left" class="fa fa-arrow-left"></i>
+      Page <span data-page-current></span> of <span data-page-total></span>
+      <i data-page="right" class="fa fa-arrow-right"></i>
     </p>
 
+    <p class="message"></p>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
