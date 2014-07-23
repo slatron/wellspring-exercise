@@ -41,7 +41,8 @@ jQuery.noConflict();
         });
 
         allTrains = sanitizedData;
-        updateTable(allTrains);
+        
+        updateTable(allTrains.slice(page - 1, page + 4));
       };
 
   // Get json data
