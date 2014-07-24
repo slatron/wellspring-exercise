@@ -72,9 +72,23 @@
 
       <p id="message"></p>
 
+      <div id="newline">
+        <label for="new-line">Train Line:</label>
+        <select name="new-line" id="new-line">
+          <option value="El">EL</option>
+          <option value="Amtrak">Amtrak</option>
+          <option value="Metra">Metra</option>
+        </select>
+        <br>
+        <label for="new-route">Route:</label> <input type="text" name="new-route" id="new-route"><br>
+        <label for="new-run">Run Number:</label> <input type="text" name="new-run" id="new-run"><br>
+        <label for="new-id">Operator ID:</label> <input type="text" name="new-id" id="new-id"><br>
+        <a href="#" data-submit>Add New Record</a>
+      </div>
+
     </main>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
     <script src="js/objSort.js"></script>
     <script src="js/main.js"></script>

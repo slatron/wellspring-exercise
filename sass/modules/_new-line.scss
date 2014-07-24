@@ -1,0 +1,16 @@
+#newline {
+  
+  background: $color-gray-light;
+  border: 1px solid $color-brown;
+  display: inline-block;
+  padding: $base-unit-half;
+
+  @include border-radius(5px);
+
+  label {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 150px;
+  }
+
+}

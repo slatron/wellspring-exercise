@@ -274,19 +274,24 @@ jQuery.noConflict();
     paginate($this.data('page'));
 
     return false;
-  })
-
-  // Keyboard pagination
-  $(document).keydown(function (e) { 
-
-      if (e.keyCode == 37 || e.keyCode == 40) {
-          paginate('left');
-      } else if (e.keyCode == 39 || e.keyCode == 38) {
-          paginate('right');
-      }
   });
 
+  // ==============================================
+  // Keyboard pagination
+  // ==============================================
+  $(document).keydown(function (e) { 
+
+    if (e.keyCode == 37 || e.keyCode == 40) {
+        paginate('left');
+    } else if (e.keyCode == 39 || e.keyCode == 38) {
+        paginate('right');
+    }
+
+  });
+
+  // ==============================================
   // Table Column Sorting
+  // ==============================================
   $table.on('click', 'th', function() {
     var $this = $(this);
 
@@ -307,7 +312,9 @@ jQuery.noConflict();
     return false;
   })
 
+  // ==============================================
   // Filter Buttons
+  // ==============================================
   $filters.on('change', 'input', function() {
 
     if($cbs.filter(':checked').length > 0) {
@@ -332,19 +339,49 @@ jQuery.noConflict();
     } else {
 
       $(this).prop('checked', true);
-      showMsg("You need to leave at least one train line checked to see results.")
+      showMsg("You need to leave at least one train line checked to see results.");
 
     }
 
-  })
+    return false;
 
+  });
+
+  // ==============================================
+  // New Record Form Processing
+  // ==============================================
+  $('a[data-submit]').on('click', function(e) {
+    e.preventDefault();
+
+    var newroute = $('#new-route').val(),
+        newrun   = $('#new-run').val(),
+        newid    = $('#new-id').val();
+
+    newroute.length > 0 ? null : newroute = "unknown";
+    newrun.length > 0 ? null : newrun = "unknown";
+    newid.length > 0 ? null : newid = "unknown";
+
+    var newRecord = {};
+
+    newRecord.trainLine  = $('#new-line').val();
+    newRecord.routeName  = newroute;
+    newRecord.runNumber  = newrun;
+    newRecord.operatorId = newid;
+
+    // Add new record to current and future results
+    filteredTrains.push(newRecord);
+    allTrains.push(newRecord);
+
+    // Reinitialize table
+    init(filteredTrains, true);
+
+  });
+
+  // ==============================================
   // Mobile menu icon 
+  // ==============================================
   $('.menu-icon').on('click', function() {
     $filters.toggleClass('active');
   });
 
 })(jQuery);
-
-
-
-
