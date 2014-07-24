@@ -1,13 +1,11 @@
-wellspring-excercise
-====================
+Code Exercise for Wellspring
+============================
 
 [View the application](http://slatron.github.io/wellspring-exercise/index.html)
 
-Code Exercise for Wellspring
-
 This is the result of my code screening exercise.
 
-## notes
+### Notes
 
 * User error messages can be triggered by paginating outside of bounds or attempting to unselect all train line filters
 
@@ -17,14 +15,14 @@ This is the result of my code screening exercise.
 
 * Menu and message animations are CSS3 transisions
 
-## Browsers Tested (all on Mac)
+### Browsers Tested (all on Mac)
 
 * Chrome
 * Firefox
 * Safari
 * Mobile Chrome (Android and iPhone devices)
 
-## Next Steps
+### Next Steps
 
 These are the next things I would to to improve the application:
 
@@ -36,7 +34,7 @@ These are the next things I would to to improve the application:
 
 * Resolve outstanding bugs (below)
 
-### Known Outstanding Bugs
+#### Known Outstanding Bugs
 
 * Error messages show below screen on iPhone
 
