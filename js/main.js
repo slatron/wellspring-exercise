@@ -37,7 +37,7 @@ jQuery.noConflict();
 
         var $rows = $('<tbody></tbody>');
 
-        $message.empty().removeClass('active');
+        $message.removeClass('active');
         $table.find('tbody').remove();
         $('[data-total-runs]').text(filteredTrains.length);
         $('[data-page-current]').text(page);
@@ -133,7 +133,7 @@ jQuery.noConflict();
 
         var result;
 
-        // Sanitize data by removing unrecognized lines
+        // Sanitize data by removing unrecognized train lines
         result = $.map(data, function(elem) {
           if(lines.indexOf(elem.trainLine) > -1) {
             return elem;
@@ -142,7 +142,24 @@ jQuery.noConflict();
           }
         });
 
-        return result;
+        // tempResult will use the objects in the arrays as
+        // strings for the keys. This will cause duplicate
+        // entries to overwrite themselves in the temp array
+        var tempResult = {};
+        for (var i = 0, n = result.length; i < n; i++) {
+            var item = result[i];
+            tempResult[ item.trainLine + " - " + item.routeName + " - " + item.runNumber + " - " + item.operatorId ] = item;
+        }
+
+        // then, use the new array to populate
+        // the final return array
+        var i = 0,
+            nonDuplicatedArray = [];    
+        for(var item in tempResult) {
+            nonDuplicatedArray[i++] = tempResult[item];
+        }
+
+        return nonDuplicatedArray;
 
       },
 

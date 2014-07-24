@@ -73,7 +73,8 @@ main {
     padding: 48px 1% 0;
     width: 30%; } }
 .pagination i {
-  cursor: pointer; }
+  cursor: pointer;
+  font-size: 22px; }
 
 #message {
   background: #e66a59;
