@@ -249,7 +249,7 @@ jQuery.noConflict();
 
         return false;
 
-      };
+      }; // end of application variables
 
   // ==============================================
   // Initial ajax call for json data
